@@ -1,0 +1,17 @@
+name: 01 - Hello Actions
+run-name: Hello run by @${{ github.actor }}
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print runner context
+        run: |
+          echo "Hello from GitHub Actions"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Commit: $GITHUB_SHA"
