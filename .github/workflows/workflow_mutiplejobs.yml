@@ -1,0 +1,31 @@
+name: 12 - Bash Parallel Jobs
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  job-one:
+    name: Job 1 - System Information
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Job one started"
+          uname -a
+          echo "Job one completed"
+  job-two:
+    name: Job 2 - Date Information
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Job two started"
+          date -u
+          echo "Job two completed"
+  job-three:
+    name: Job 3 - Disk Information
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Job three started"
+          df -h
+          echo "Job three completed"
+# Because these jobs do not use "needs", GitHub can run them in parallel.
