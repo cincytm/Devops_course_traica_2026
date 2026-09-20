@@ -1,0 +1,21 @@
+name: 2 - Bash Single Job
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  learn-basics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Print a message
+        run: echo "Hello from my first GitHub Actions job"
+      - name: Step 2 - Show runner information
+        run: |
+          echo "Operating system: $RUNNER_OS"
+          echo "Runner architecture: $RUNNER_ARCH"
+          echo "Workspace: $GITHUB_WORKSPACE"
+      - name: Step 3 - Run several Bash commands
+        run: |
+          current_time=$(date -u)
+          echo "Current UTC time: $current_time"
+          echo "All steps in this job run in order."
