@@ -18,7 +18,7 @@ jobs:
     steps:
       - run: |
           echo "Job two started"
-          date -u
+          date-u
           echo "Job two completed"
   job-three:
     name: Job 3 - Disk Information
