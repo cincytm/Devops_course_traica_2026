@@ -1,0 +1,28 @@
+name: 13 - Bash Job Dependencies
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "1. Preparing the work"
+  test:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "2. Testing starts only after prepare succeeds"
+  security-check:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "2. Security check also starts after prepare"
+  finish:
+    needs: [test, security-check]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "3. Finish starts after both parallel jobs succeed"
+# Execution graph:
+# prepare -> test -----------\
+#          security-check ----> finish
