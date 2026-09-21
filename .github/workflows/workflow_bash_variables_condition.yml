@@ -1,0 +1,46 @@
+name: 14 - Bash Variables and Conditions
+run-name: Greet ${{ inputs.person }} from ${{ inputs.environment }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      person:
+        description: Who should the workflow greet?
+        required: true
+        default: Student
+        type: string
+      environment:
+        description: Select an environment
+        required: true
+        default: development
+        type: choice
+        options:
+          - development
+          - production
+
+permissions:
+  contents: read
+
+env:
+  COURSE_NAME: GitHub Actions Basics
+
+jobs:
+  demonstrate:
+    runs-on: ubuntu-latest
+    env:
+      PERSON: ${{ inputs.person }}
+    steps:
+      - name: Use workflow and job variables
+        run: echo "Hello $PERSON. Welcome to $COURSE_NAME."
+
+      - name: Development-only step
+        if: inputs.environment == 'development'
+        run: echo "Running the development commands"
+
+      - name: Production-only step
+        if: inputs.environment == 'production'
+        run: echo "Running the production commands"
+
+      - name: Always show the selected value
+        if: always()
+        run: echo "Selected environment is ${{ inputs.environment }}"
