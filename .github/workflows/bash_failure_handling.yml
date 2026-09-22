@@ -1,0 +1,24 @@
+name: 16 - Bash Failure Handling
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  failure-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Successful step
+        run: echo "This step succeeds"
+
+      - name: Allowed failure
+        continue-on-error: true
+        run: |
+          echo "This command returns exit code 1"
+          exit 1
+
+      - name: Workflow continues
+        run: echo "This runs because the previous failure was allowed"
+
+      - name: Cleanup or reporting step
+        if: always()
+        run: echo "An always() step runs even when an earlier step fails":
