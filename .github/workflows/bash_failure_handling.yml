@@ -12,8 +12,7 @@ jobs:
 
       - name: Allowed failure
         continue-on-error: true
-        run: |
-          echo "This command returns exit code 1"
+        run: echo "This command returns exit code 1"
           exit 1
 
       - name: Workflow continues
@@ -21,4 +20,4 @@ jobs:
 
       - name: Cleanup or reporting step
         if: always()
-        run: echo "An always() step runs even when an earlier step fails"
+        run: echo "An always() step runs even when an earlier step fails"
